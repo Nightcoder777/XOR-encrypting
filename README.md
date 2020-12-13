@@ -20,4 +20,6 @@ To use encryptor/decryptor you need specify 3 parameters:
   
   -k - Key used for encrypting text (it is better to use a numeric key)
   
-  -o - Output file with encrypted/decrypted text
+  -o - Output file with encrypted/decrypted text 
+  
+  Update 13 Dec 2020 23:57 - If you specify "@" as output file name the result of encryption/decryption will be printed in console.
