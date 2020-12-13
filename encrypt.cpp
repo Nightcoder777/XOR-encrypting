@@ -10,6 +10,7 @@ int main(int argc, char* argv[]){
     std::string key;
     std::string filename;
     std::string outfile;
+    bool printresult = false;
     
     for(int i = 0; i < argc; i++)
     {
@@ -20,7 +21,8 @@ int main(int argc, char* argv[]){
             filename = argv[i + 1];
         } else if ((std::string)argv[i] == "-o")
         {
-            outfile = argv[i + 1];
+            if((std::string)argv[i + 1] != "@") outfile = argv[i + 1];
+            else printresult = true;
         }
     }
 
@@ -30,9 +32,11 @@ int main(int argc, char* argv[]){
  
     std::string enc = encrypt(str, key);
 
-    std::ofstream fout;
-    fout.open(outfile);
-    fout.write(enc.c_str(), std::strlen(enc.c_str()));
-    fout.close();
+    if(printresult != true){
+        std::ofstream fout;
+        fout.open(outfile);
+        fout.write(enc.c_str(), std::strlen(enc.c_str()));
+        fout.close();
+    } else std::cout << enc;
     return 0;
 }
