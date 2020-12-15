@@ -12,7 +12,7 @@ Decryptor:
 g++ decrypt.cpp -o decrypt 
 
 # Using
-Example: ./encrypt -f text_to_encrypt.txt -k key -o encrypted_text.txt
+Example: ./encrypt -f source_file.txt -k key -o encrypted_file.txt
 
 To use encryptor/decryptor you need specify 3 obligatory parameters:
 
