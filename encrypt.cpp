@@ -11,6 +11,7 @@ int main(int argc, char* argv[]){
     std::string filename;
     std::string outfile;
     bool printresult = false;
+    bool binary = false;
     
     for(int i = 0; i < argc; i++)
     {
@@ -23,20 +24,32 @@ int main(int argc, char* argv[]){
         {
             if((std::string)argv[i + 1] != "@") outfile = argv[i + 1];
             else printresult = true;
+        } else if ((std::string)argv[i] == "--binary")
+        {
+            binary = true;
+            std::cout << "Opening file in binary mode...\n";
         }
     }
+    if(!binary) std::cout << "Opening file in normal mode...\n";
+    std::string str;
 
-    std::ifstream t;
-    t.open(filename);
-    std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
- 
+    if(!binary){
+        std::ifstream t;
+        t.open(filename);
+        str = std::string((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
+    } else {
+        std::ifstream is(filename, std::ios::binary);
+        str = std::string((std::istreambuf_iterator<char>(is.rdbuf())), std::istreambuf_iterator<char>());
+    }
+    std::cout << "Encrypting all data...\n";
     std::string enc = encrypt(str, key);
 
     if(printresult != true){
         std::ofstream fout;
-        fout.open(outfile);
-        fout.write(enc.c_str(), std::strlen(enc.c_str()));
+        if(!binary) fout.open(outfile); else fout.open(outfile, std::ios::binary);
+        fout << enc;
         fout.close();
+        std::cout << "File \"" << filename << "\" encrypted and saved as \"" << outfile << "\"";
     } else std::cout << enc;
     return 0;
 }
