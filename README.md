@@ -14,12 +14,14 @@ g++ decrypt.cpp -o decrypt
 # Using
 Example: ./encrypt -f text_to_encrypt.txt -k key -o encrypted_text.txt
 
-To use encryptor/decryptor you need specify 3 parameters:
+To use encryptor/decryptor you need specify 3 obligatory parameters:
 
-  -f - File with text to encrypt/decrypt
+  -f - File to encrypt/decrypt
   
-  -k - Key used for encrypting text (it is better to use a numeric key)
+  -k - Key used for encrypting file (it is better to use a numeric key)
   
-  -o - Output file with encrypted/decrypted text 
+  -o - Output file with encrypted/decrypted text or file 
+  
+  --binary - Makes it possible to encrypt/decrypt binary files like images, executeable files, etc.
   
   Update 13 Dec 2020 23:57 - If you specify "@" as output file name the result of encryption/decryption will be printed in console.
